@@ -13,7 +13,7 @@ public:
     void saludar();
 };
 
-// --- Desarrollo de la Función (Definición) ---
+// --- Desarrollo de la Función ---
 
 Cliente::Cliente(string p_nombre) {
     nombre = p_nombre;
