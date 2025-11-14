@@ -15,7 +15,7 @@ public:
     void mostrar();
 };
 
-// --- Desarrollo de la Función (Definición) ---
+// --- Desarrollo de la Función ---
 
 Maceta::Maceta(string p_material, string p_color) {
     material = p_material;
