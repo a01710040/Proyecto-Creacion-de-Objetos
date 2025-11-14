@@ -3,7 +3,7 @@
 
 class Planta {
 private:
-    string nombre;  // Usando 'string' directamente
+    string nombre;
     double precio;
 
 public:
@@ -15,7 +15,7 @@ public:
     void mostrar();
 };
 
-// --- Desarrollo de la Función (Definición) ---
+// --- Desarrollo de la Función ---
 
 Planta::Planta(string p_nombre, double p_precio) {
     nombre = p_nombre;
