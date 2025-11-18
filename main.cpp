@@ -2,6 +2,7 @@
 #include "Planta.h"
 #include "Maceta.h"
 #include "Cliente.h"
+using namespace std;
 
 int main() {
     cout << "--- Probando Vivero (Versión Final Simplificada) ---" << endl << endl;
