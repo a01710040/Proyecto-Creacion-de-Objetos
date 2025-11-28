@@ -1,33 +1,47 @@
-#include <string>
+#ifndef CLIENTE_H
+#define CLIENTE_H
+
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 class Cliente {
 private:
     string nombre;
+    double presupuesto;
 
 public:
-    // Declaraciones
-    Cliente(string p_nombre);
+    Cliente() {
+        nombre = "Sin Nombre";
+        presupuesto = 0.0;
+    }
+
+    Cliente(string p_nombre, double p_presupuesto);
     string getNombre();
-    void setNombre(string nuevoNombre);
-    void saludar();
+    bool comprar(double costo);
+    void mostrar();
 };
 
-// --- Desarrollo de la Función ---
-
-Cliente::Cliente(string p_nombre) {
+Cliente::Cliente(string p_nombre, double p_presupuesto) {
     nombre = p_nombre;
+    presupuesto = p_presupuesto;
 }
 
 string Cliente::getNombre() {
     return nombre;
 }
 
-void Cliente::setNombre(string nuevoNombre) {
-    nombre = nuevoNombre;
+bool Cliente::comprar(double costo) {
+    if (presupuesto >= costo) {
+        presupuesto = presupuesto - costo;
+        return true;
+    }
+    return false;
 }
 
-void Cliente::saludar() {
-    cout << "Hola, me llamo " << nombre << "." << endl;
+void Cliente::mostrar() {
+    cout << "Cliente: " << nombre << " | Saldo: $" << presupuesto << endl;
 }
+
+#endif
