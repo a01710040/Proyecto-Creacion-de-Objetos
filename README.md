@@ -1,45 +1,35 @@
-# PROYECTO: Gestor Básico de Vivero
+# TC1033 Proyecto Vivero
 
-Este proyecto es un sistema básico de **modelado de productos y clientes** para un vivero, usando Programación Orientada a Objetos en C++.
+Este proyecto fue desarrollado para la materia de **Pensamiento Orientado a Objetos (TC1033)**.
 
 ---
 
 ## Contexto
 
-El programa simula digitalmente los elementos esenciales de un vivero para futuras operaciones de gestión. Los elementos modelados son:
+El proyecto simula el sistema de gestión de un pequeño **Vivero** . El sistema debe ser capaz de administrar su inventario de productos (plantas y macetas) y la lista de clientes, permitiendo la simulación de transacciones de venta.
 
-1.  **Plantas:** Los artículos principales que se venden.
-2.  **Macetas:** Los contenedores donde se venden las plantas.
-3.  **Clientes:** Las personas que compran.
+Para organizar la información, se utilizó una estructura de clases que sigue estos principios:
 
-El diseño se enfoca en tener clases aisladas y funcionales, pero muy simples, para facilitar los cambios en los siguientes avances.
+* **Herencia:** Las clases `Planta` y `Maceta` heredan las propiedades básicas de la clase padre `Producto` (nombre y precio).
+* **Composición:** La clase `Vivero` **contiene** los arreglos fijos de objetos `Planta`, `Maceta` y `Cliente`.
 
 ---
 
 ## Funcionalidad
 
-El programa solo permite crear y manipular las instancias de las clases en la función principal (`main`). No hay interacción con el usuario (sin menú en consola).
+El programa corre sobre consola y ofrece las siguientes capacidades principales:
 
-El programa demuestra:
-* **Crear** objetos de tipo `Planta`, `Maceta` y `Cliente`.
-* **Comprobar** el estado inicial de los objetos al llamar a sus métodos de información (`mostrar()`).
-* **Modificar** los atributos encapsulados (privados) usando los *setters*.
-* **Recuperar** los atributos usando los *getters* y mostrar la información actualizada.
+* **Alta de Productos y Clientes:** Permite inicializar y agregar nuevos objetos (`Planta`, `Maceta`, `Cliente`) al sistema del `Vivero`.
+* **Reporte de Inventario:** Muestra el estado actual del stock de plantas y el saldo disponible de los clientes.
+* **Simulación de Venta:** Realiza una transacción verificando el **stock disponible** de la planta y el **presupuesto** del cliente. Si la venta es exitosa, actualiza el stock y el saldo del cliente.
+
+**Nota:** La capacidad máxima de todos los arreglos internos (Inventario y Clientes) está limitada a **50 elementos**.
 
 ---
 
 ## Consideraciones
 
-* **Compilar con:** `g++ main.cpp -o vivero`
-* **Correr en Linux/Mac:** `./vivero`
-* **Correr en Windows:** `vivero.exe`
+El proyecto está diseñado para compilarse uniendo todos los archivos de encabezado:
 
----
-
-## Clases del Proyecto
-
-| Clase | Atributos Principales | Métodos Clave |
-| :--- | :--- | :--- |
-| **Planta** | nombre, precio | constructor, getters, setters (`setPrecio`), mostrar() |
-| **Maceta** | material, color | constructor, getters, setters (`setColor`), mostrar() |
-| **Cliente** | nombre | constructor, getters, setters (`setNombre`), saludar() |
+```bash
+g++ main.cpp -o gestor_vivero
