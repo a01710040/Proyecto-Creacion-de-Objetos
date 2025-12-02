@@ -24,9 +24,9 @@ int main() {
     
     while (opcion != 0) {
         cout << "\n=== MENU PRINCIPAL VIVERO ===" << endl;
-        cout << "1. Crear nueva Planta (Composicion)" << endl;
-        cout << "2. Crear nueva Maceta (Composicion)" << endl;
-        cout << "3. Registrar Cliente (Agregacion)" << endl;
+        cout << "1. Crear nueva Planta" << endl;
+        cout << "2. Crear nueva Maceta" << endl;
+        cout << "3. Registrar Cliente" << endl;
         cout << "4. Mostrar Reporte" << endl;
         cout << "5. Realizar Venta Planta" << endl;
         cout << "6. Realizar Venta Maceta" << endl;
