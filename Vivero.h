@@ -1,5 +1,5 @@
-#ifndef VIVERO_H
-#define VIVERO_H
+#ifndef VIVERO_H_
+#define VIVERO_H_
 
 #include <iostream>
 #include "Productos.h"
@@ -7,117 +7,161 @@
 
 using namespace std;
 
-#define MAX 50
+// Constante para el tamaño máximo de los arreglos
+#define MAX_INVENTARIO 50
 
+/*
+ * Clase Vivero: Clase Gestora
+ * Implementa las relaciones de Composición y Agregación.
+ * Contiene el inventario de Plantas, Macetas y la lista de Clientes.
+ */
 class Vivero {
 private:
-    // Arreglos fijos para la gestión de inventario
-    Planta inventarioPlantas[MAX];
-    Maceta inventarioMacetas[MAX];
-    Cliente listaClientes[MAX];
+    // Atributos que representan las colecciones (Composición/Agregación)
+    Planta inventario_plantas[MAX_INVENTARIO];
+    Maceta inventario_macetas[MAX_INVENTARIO];
+    Cliente lista_clientes[MAX_INVENTARIO];
 
-    int contadorPlantas;
-    int contadorMacetas;
-    int contadorClientes;
+    // Contadores para llevar el registro del inventario
+    int contador_plantas;
+    int contador_macetas;
+    int contador_clientes;
 
 public:
-    Vivero();
+    // Constructores (Sobrecargados)
+    Vivero(); // Constructor por defecto
+    Vivero(int cont_p, int cont_m, int cont_c); // Constructor con parámetros
     
-    // COMPOSICIÓN (El Vivero crea los objetos)
+    // Métodos de Composición (Crean objetos internos)
     void crearPlanta(string nombre, double precio, int stock);
-    void crearMaceta(string nombre, string material, string color, double precio, bool esColgante);
+    void crearMaceta(string nombre, string material, string color, 
+                     double precio, bool esColgante);
 
-    // AGREGACIÓN (El Vivero registra el Cliente creado externamente)
+    // Método de Agregación (Recibe objeto creado externamente)
     void registrarCliente(Cliente c);
 
+    // Métodos de Gestión
     void mostrarInventario();
-    void realizarVenta(int indiceCliente, int indicePlanta);
-    void realizarVentaMaceta(int indiceCliente, int indiceMaceta);
+    void realizarVenta(int indice_cliente, int indice_planta);
+    void realizarVentaMaceta(int indice_cliente, int indice_maceta);
 };
 
 
-// === IMPLEMENTACIÓN DE MÉTODOS ===
-
+/**
+ * Constructor por Defecto: Inicializa el Vivero vacío.
+ *
+ * @param Ninguno
+ * @return Objeto Vivero
+ */
 Vivero::Vivero() {
-    contadorPlantas = 0;
-    contadorMacetas = 0;
-    contadorClientes = 0;
+    cout << ">> Vivero creado (Vacio)." << endl;
+    contador_plantas = 0;
+    contador_macetas = 0;
+    contador_clientes = 0;
 }
 
-// COMPOSICIÓN
+/**
+ * Constructor con Parámetros: Inicializa los contadores a valores 
+ * específicos.
+ *
+ * @param int cont_p: Contador inicial de plantas.
+ * @param int cont_m: Contador inicial de macetas.
+ * @param int cont_c: Contador inicial de clientes.
+ * @return Objeto Vivero
+ */
+Vivero::Vivero(int cont_p, int cont_m, int cont_c) {
+    cout << ">> Vivero creado con contadores iniciales." << endl;
+    contador_plantas = cont_p;
+    contador_macetas = cont_m;
+    contador_clientes = cont_c;
+}
+
+// Composición: Creación de Planta
 void Vivero::crearPlanta(string nombre, double precio, int stock) {
-    if (contadorPlantas < MAX) {
-        inventarioPlantas[contadorPlantas] = Planta(nombre, precio, stock);
-        contadorPlantas++;
+    if (contador_plantas < MAX_INVENTARIO) {
+        inventario_plantas[contador_plantas] = 
+            Planta(nombre, precio, stock);
+        contador_plantas++;
         cout << ">> Planta creada y agregada exitosamente." << endl;
     } else {
         cout << "Error: Inventario lleno." << endl;
     }
 }
 
-// COMPOSICIÓN
-void Vivero::crearMaceta(string nombre, string material, string color, double precio, bool esColgante) {
-    if (contadorMacetas < MAX) {
-        inventarioMacetas[contadorMacetas] = Maceta(nombre, material, color, precio, esColgante);
-        contadorMacetas++;
+// Composición: Creación de Maceta
+void Vivero::crearMaceta(string nombre, string material, string color, 
+                         double precio, bool esColgante) {
+    if (contador_macetas < MAX_INVENTARIO) {
+        inventario_macetas[contador_macetas] = 
+            Maceta(nombre, material, color, precio, esColgante);
+        contador_macetas++;
         cout << ">> Maceta creada y agregada exitosamente." << endl;
     } else {
         cout << "Error: Inventario lleno." << endl;
     }
 }
 
-// AGREGACIÓN
+// Agregación: Registro de Cliente
 void Vivero::registrarCliente(Cliente c) {
-    if (contadorClientes < MAX) {
-        listaClientes[contadorClientes] = c;
-        contadorClientes++;
+    if (contador_clientes < MAX_INVENTARIO) {
+        lista_clientes[contador_clientes] = c;
+        contador_clientes++;
         cout << ">> Cliente registrado exitosamente." << endl;
     } else {
         cout << "Error: Lista de clientes llena." << endl;
     }
 }
 
+// Método para mostrar todo el inventario y la lista de clientes
 void Vivero::mostrarInventario() {
     cout << "\n===== REPORTE VIVERO =====" << endl;
     
-    cout << "--- Plantas (" << contadorPlantas << ") ---" << endl;
-    for (int i = 0; i < contadorPlantas; i++) {
+    cout << "--- Plantas (" << contador_plantas << ") ---" << endl;
+    for (int i = 0; i < contador_plantas; i++) {
         cout << i << ". "; 
-        inventarioPlantas[i].mostrar();
+        inventario_plantas[i].mostrar();
     }
 
-    cout << "--- Macetas (" << contadorMacetas << ") ---" << endl;
-    for (int i = 0; i < contadorMacetas; i++) {
+    cout << "--- Macetas (" << contador_macetas << ") ---" << endl;
+    for (int i = 0; i < contador_macetas; i++) {
         cout << i << ". ";
-        inventarioMacetas[i].mostrar();
+        inventario_macetas[i].mostrar();
     }
 
-    cout << "--- Clientes (" << contadorClientes << ") ---" << endl;
-    for (int i = 0; i < contadorClientes; i++) {
+    cout << "--- Clientes (" << contador_clientes << ") ---" << endl;
+    for (int i = 0; i < contador_clientes; i++) {
         cout << i << ". ";
-        listaClientes[i].mostrar();
+        lista_clientes[i].mostrar();
     }
     cout << "==========================" << endl;
 }
 
-// VENTA DE PLANTAS
-void Vivero::realizarVenta(int indiceCliente, int indicePlanta) {
-    if (indiceCliente >= 0 && indiceCliente < contadorClientes && 
-        indicePlanta >= 0 && indicePlanta < contadorPlantas) {
+/**
+ * Realiza la venta de una Planta y actualiza el stock/saldo.
+ *
+ * @param int indice_cliente: Índice del cliente en la lista.
+ * @param int indice_planta: Índice de la planta en el inventario.
+ * @return void
+ */
+void Vivero::realizarVenta(int indice_cliente, int indice_planta) {
+    // Validación de índices...
+    if (indice_cliente >= 0 && indice_cliente < contador_clientes && 
+        indice_planta >= 0 && indice_planta < contador_plantas) {
         
-        Cliente elCliente = listaClientes[indiceCliente];
-        Planta laPlanta = inventarioPlantas[indicePlanta];
+        Cliente el_cliente = lista_clientes[indice_cliente];
+        Planta la_planta = inventario_plantas[indice_planta];
 
-        cout << "\nIntento de venta: " << elCliente.getNombre() << " quiere " << laPlanta.getNombre() << endl;
+        cout << "\nIntento de venta: " << el_cliente.getNombre() << 
+            " quiere " << la_planta.getNombre() << endl;
 
-        if (laPlanta.getStock() > 0) {
-            if (elCliente.comprar(laPlanta.getPrecio())) {
-                laPlanta.actualizarStock(-1);
+        if (la_planta.getStock() > 0) {
+            if (el_cliente.comprar(la_planta.getPrecio())) {
+                la_planta.actualizarStock(-1); // Disminuye el stock
                 cout << ">> Venta Exitosa!" << endl;
 
-                // Guardar objetos modificados de vuelta
-                listaClientes[indiceCliente] = elCliente;
-                inventarioPlantas[indicePlanta] = laPlanta;
+                // Guardar los objetos modificados
+                lista_clientes[indice_cliente] = el_cliente;
+                inventario_plantas[indice_planta] = la_planta;
             } else {
                 cout << ">> Saldo insuficiente." << endl;
             }
@@ -129,26 +173,34 @@ void Vivero::realizarVenta(int indiceCliente, int indicePlanta) {
     }
 }
 
-// VENTA DE MACETAS
-void Vivero::realizarVentaMaceta(int indiceCliente, int indiceMaceta) {
-    if (indiceCliente >= 0 && indiceCliente < contadorClientes && 
-        indiceMaceta >= 0 && indiceMaceta < contadorMacetas) {
+/**
+ * Realiza la venta de una Maceta. Elimina la maceta del inventario.
+ *
+ * @param int indice_cliente: Índice del cliente en la lista.
+ * @param int indice_maceta: Índice de la maceta en el inventario.
+ * @return void
+ */
+void Vivero::realizarVentaMaceta(int indice_cliente, int indice_maceta) {
+    // Validación de índices...
+    if (indice_cliente >= 0 && indice_cliente < contador_clientes && 
+        indice_maceta >= 0 && indice_maceta < contador_macetas) {
         
-        Cliente elCliente = listaClientes[indiceCliente];
-        Maceta laMaceta = inventarioMacetas[indiceMaceta];
+        Cliente el_cliente = lista_clientes[indice_cliente];
+        Maceta la_maceta = inventario_macetas[indice_maceta];
 
-        cout << "\nIntento de venta: " << elCliente.getNombre() << " quiere " << laMaceta.getNombre() << endl;
+        cout << "\nIntento de venta: " << el_cliente.getNombre() << 
+            " quiere " << la_maceta.getNombre() << endl;
 
-        if (elCliente.comprar(laMaceta.getPrecio())) {
-            cout << ">> Venta Exitosa!" << endl;
+        if (el_cliente.comprar(la_maceta.getPrecio())) {
+            cout << ">> Venta Exitosa! Maceta eliminada de inventario" << endl;
             
-            listaClientes[indiceCliente] = elCliente;
+            lista_clientes[indice_cliente] = el_cliente;
             
-            // ELIMINAR MACETA DEL INVENTARIO (Desplazamiento)
-            for (int i = indiceMaceta; i < contadorMacetas - 1; i++) {
-                inventarioMacetas[i] = inventarioMacetas[i + 1];
+            // Eliminar Maceta (Desplazamiento de elementos)
+            for (int i = indice_maceta; i < contador_macetas - 1; i++) {
+                inventario_macetas[i] = inventario_macetas[i + 1];
             }
-            contadorMacetas--;
+            contador_macetas--;
         } else {
             cout << ">> Saldo insuficiente." << endl;
         }
@@ -157,4 +209,4 @@ void Vivero::realizarVentaMaceta(int indiceCliente, int indiceMaceta) {
     }
 }
 
-#endif
+#endif // VIVERO_H_
