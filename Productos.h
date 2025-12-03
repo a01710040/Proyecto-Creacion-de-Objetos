@@ -1,84 +1,159 @@
-#ifndef PRODUCTOS_H
-#define PRODUCTOS_H
+#ifndef PRODUCTOS_H_
+#define PRODUCTOS_H_
 
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-// === CLASE PADRE: PRODUCTO ===
+/*
+ * Clase Producto: Clase base que contiene los atributos genéricos 
+ * de todo artículo vendible en el vivero. 
+ * Las clases Planta y Maceta heredan de esta clase.
+ */
 class Producto {
 protected:
-    string nombre;
-    double precio;
+    // Atributos protegidos para permitir el acceso a las clases hijas
+    string nombre_producto;
+    double precio_producto;
 
 public:
-    Producto() {
-        nombre = "Sin Nombre";
-        precio = 0.0;
-    }
+    // Constructores
+    Producto();
+    Producto(string nombre_in, double precio_in);
 
-    Producto(string p_nombre, double p_precio) {
-        nombre = p_nombre;
-        precio = p_precio;
-    }
+    // Getters
+    string getNombre() const;
+    double getPrecio() const;
 
-    string getNombre() { return nombre; }
-    double getPrecio() { return precio; }
+    // Setter (método mutador)
+    void setPrecio(double nuevo_precio);
 };
 
-// === CLASE HIJA: PLANTA ===
+/**
+ * Constructor por defecto de la clase Producto.
+ * Inicializa nombre y precio a valores por defecto.
+ *
+ * @param Ninguno
+ * @return Objeto Producto inicializado
+ */
+Producto::Producto() {
+    nombre_producto = "Sin Nombre";
+    precio_producto = 0.0;
+}
+
+/**
+ * Constructor con parámetros de la clase Producto.
+ *
+ * @param string nombre_in: Nombre del producto.
+ * @param double precio_in: Precio del producto.
+ * @return Objeto Producto inicializado
+ */
+Producto::Producto(string nombre_in, double precio_in) {
+    nombre_producto = nombre_in;
+    precio_producto = precio_in;
+}
+
+// Implementación del getter para obtener el nombre
+string Producto::getNombre() const {
+    return nombre_producto;
+}
+
+// Implementación del getter para obtener el precio
+double Producto::getPrecio() const {
+    return precio_producto;
+}
+
+/**
+ * Setter para actualizar el precio del producto.
+ *
+ * @param double nuevo_precio: El nuevo precio a asignar.
+ * @return void
+ */
+void Producto::setPrecio(double nuevo_precio) {
+    if (nuevo_precio >= 0) {
+        precio_producto = nuevo_precio;
+    }
+}
+
+
+/*
+ * Clase Planta: Clase hija de Producto.
+ * Contiene el atributo 'stock' específico para plantas.
+ */
 class Planta : public Producto {
 private:
-    int stock;
+    int stock_disponible;
 
 public:
+    // Constructores
     Planta() : Producto() {
-        stock = 0;
+        stock_disponible = 0;
     }
 
-    Planta(string p_nombre, double p_precio, int p_stock) : Producto(p_nombre, p_precio) {
-        stock = p_stock;
+    Planta(string nombre_in, double precio_in, int stock_in) : 
+        Producto(nombre_in, precio_in) {
+        stock_disponible = stock_in;
     }
 
-    int getStock() { return stock; }
-    
-    void actualizarStock(int cantidad) {
-        if (stock + cantidad >= 0) {
-            stock = stock + cantidad;
-        } else {
-            cout << "No hay suficiente stock." << endl;
-        }
-    }
-
-    void mostrar() {
-        cout << "Planta: " << nombre << " | Precio: $" << precio << " | Stock: " << stock << endl;
-    }
+    // Getters y Métodos de gestión
+    int getStock() const { return stock_disponible; }
+    void actualizarStock(int cantidad);
+    void mostrar();
 };
 
-// === CLASE HIJA: MACETA ===
+/**
+ * Método para actualizar la cantidad de stock disponible.
+ *
+ * @param int cantidad: Cantidad a añadir (positivo) o restar (negativo).
+ * @return void
+ */
+void Planta::actualizarStock(int cantidad) {
+    if (stock_disponible + cantidad >= 0) {
+        stock_disponible = stock_disponible + cantidad;
+    } else {
+        cout << "ERROR: No hay suficiente stock." << endl;
+    }
+}
+
+// Método para mostrar la información completa de la planta
+void Planta::mostrar() {
+    cout << "Planta: " << nombre_producto << " | Precio: $" << 
+        precio_producto << " | Stock: " << stock_disponible << endl;
+}
+
+
+/*
+ * Clase Maceta: Clase hija de Producto.
+ * Contiene atributos específicos como material y si es colgante.
+ */
 class Maceta : public Producto {
 private:
-    string material;
-    string color;
-    bool esColgante;
+    string material_maceta;
+    string color_maceta;
+    bool es_colgante;
 
 public:
+    // Constructores
     Maceta() : Producto() {
-        material = "N/A";
-        color = "N/A";
-        esColgante = false;
+        material_maceta = "N/A";
+        color_maceta = "N/A";
+        es_colgante = false;
     }
 
-    Maceta(string p_nombre, string p_material, string p_color, double p_precio, bool p_colgante) : Producto(p_nombre, p_precio) {
-        material = p_material;
-        color = p_color;
-        esColgante = p_colgante;
+    Maceta(string nombre_in, string material_in, string color_in, 
+           double precio_in, bool colgante_in) 
+    : Producto(nombre_in, precio_in) {
+        material_maceta = material_in;
+        color_maceta = color_in;
+        es_colgante = colgante_in;
     }
 
+    // Método para mostrar la información completa de la maceta
     void mostrar() {
-        cout << "Maceta: " << nombre << " (" << material << ") | Precio: $" << precio << endl;
+        cout << "Maceta: " << nombre_producto << " (" << material_maceta << 
+            ") | Precio: $" << precio_producto << endl;
     }
 };
 
-#endif
+#endif // PRODUCTOS_H_
