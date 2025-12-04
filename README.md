@@ -74,7 +74,7 @@ El programa incluye mensajes de error y rechaza la acción si:
 
 ---
 
-## 5. Compilación y Ejecución 🚀
+## 5. Compilación y Ejecución
 
 Para compilar y ejecutar el programa desde la terminal, siga estos pasos:
 
@@ -86,3 +86,11 @@ Para compilar y ejecutar el programa desde la terminal, siga estos pasos:
     ```bash
     ./gestor_vivero
     ```
+
+## 6. Correciones
+
+1.  **Implementa SICT0303A:** Añadí using namespace std; porque no compilaba, se encuentra en los archivos.
+2.  **Toma de decisiones SICT0302A:** Hice mi diseño del diagrama de clases más claro para que se comprendiera más el concepto de herencia, se encuentra en el diagrama de clases.
+3.  **Implementa SICT0303A:** Agregué un menú interactivo para que el programa fuera más amigable con el usuario, se encuentra en el código.
+4.  **Implementa SICT0303A:** Modifiqué mi composición ya que no estaba bien implementada, se encuentra en el código.
+5.  **Estándares   SICT0401A:** Agregué comentarios al código para ir explicando que va haciendo y cómo se va comportando el pograma, se encuentra en el código.
