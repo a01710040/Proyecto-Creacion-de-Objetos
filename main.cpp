@@ -5,26 +5,26 @@ using namespace std;
 
 int main() {
     // Creamos el objeto principal usando el constructor por defecto
-    Vivero mi_vivero;
+    Vivero MiVivero;
     
     // Variable para la opción del menú
-    int opcion = -1; 
+    int Opcion = -1; // PascalCase
 
     // Variables temporales para la entrada del usuario
-    string nombre_temp, material_temp, color_temp;
-    double precio_temp, presupuesto_temp;
-    int stock_temp;
-    bool es_colgante_temp;
-    int indice_cliente, indice_planta, indice_maceta; // Indices para ventas
+    string NombreTemp, MaterialTemp, ColorTemp;
+    double PrecioTemp, PresupuestoTemp;
+    int StockTemp;
+    bool EsColganteTemp;
+    int IndiceCliente, IndicePlanta, IndiceMaceta; // Indices para ventas
 
     // Precarga para tener datos de prueba
-    Cliente cliente_inicial("Ana Martinez", 500.0);
-    mi_vivero.registrarCliente(cliente_inicial);
-    mi_vivero.crearPlanta("Rosa Roja", 150.0, 3);
-    mi_vivero.crearMaceta("Barro", "Arcilla", "Cafe", 40.0, false);
+    Cliente ClienteInicial("Ana Martinez", 500.0);
+    MiVivero.RegistrarCliente(ClienteInicial);
+    MiVivero.CrearPlanta("Rosa Roja", 150.0, 3);
+    MiVivero.CrearMaceta("Barro", "Arcilla", "Cafe", 40.0, false);
     
     // Bucle principal del menú
-    while (opcion != 0) {
+    while (Opcion != 0) {
         cout << "\n=== MENU PRINCIPAL VIVERO ===" << endl;
         cout << "1. Crear nueva Planta" << endl;
         cout << "2. Crear nueva Maceta" << endl;
@@ -36,56 +36,56 @@ int main() {
         cout << "Seleccione una opcion: ";
         
         // Manejo de error de entrada
-        if (!(cin >> opcion)) {
+        if (!(cin >> Opcion)) {
             cout << "Entrada invalida. Reiniciando menu." << endl;
             cin.clear();
             cin.ignore(10000, '\n');
             continue; 
         }
 
-        if (opcion == 1) {
+        if (Opcion == 1) {
             // Crear Planta
-            cout << "Nombre: "; cin >> nombre_temp;
-            cout << "Precio: "; cin >> precio_temp;
-            cout << "Stock: "; cin >> stock_temp;
-            mi_vivero.crearPlanta(nombre_temp, precio_temp, stock_temp);
+            cout << "Nombre: "; cin >> NombreTemp;
+            cout << "Precio: "; cin >> PrecioTemp;
+            cout << "Stock: "; cin >> StockTemp;
+            MiVivero.CrearPlanta(NombreTemp, PrecioTemp, StockTemp);
         }
-        else if (opcion == 2) {
+        else if (Opcion == 2) {
             // Crear Maceta
-            cout << "Nombre: "; cin >> nombre_temp;
-            cout << "Material: "; cin >> material_temp;
-            cout << "Color: "; cin >> color_temp;
-            cout << "Precio: "; cin >> precio_temp;
-            cout << "Es colgante? (1=Si, 0=No): "; cin >> es_colgante_temp;
-            mi_vivero.crearMaceta(nombre_temp, material_temp, color_temp, 
-                                 precio_temp, es_colgante_temp);
+            cout << "Nombre: "; cin >> NombreTemp;
+            cout << "Material: "; cin >> MaterialTemp;
+            cout << "Color: "; cin >> ColorTemp;
+            cout << "Precio: "; cin >> PrecioTemp;
+            cout << "Es colgante? (1=Si, 0=No): "; cin >> EsColganteTemp;
+            MiVivero.CrearMaceta(NombreTemp, MaterialTemp, ColorTemp, 
+                                 PrecioTemp, EsColganteTemp);
         }
-        else if (opcion == 3) {
+        else if (Opcion == 3) {
             // Registrar Cliente
-            cout << "Nombre: "; cin >> nombre_temp;
-            cout << "Presupuesto: "; cin >> presupuesto_temp;
-            Cliente nuevo_cliente(nombre_temp, presupuesto_temp);
-            mi_vivero.registrarCliente(nuevo_cliente);
+            cout << "Nombre: "; cin >> NombreTemp;
+            cout << "Presupuesto: "; cin >> PresupuestoTemp;
+            Cliente NuevoCliente(NombreTemp, PresupuestoTemp);
+            MiVivero.RegistrarCliente(NuevoCliente);
         }
-        else if (opcion == 4) {
+        else if (Opcion == 4) {
             // Reporte
-            mi_vivero.mostrarInventario();
+            MiVivero.MostrarInventario();
         }
-        else if (opcion == 5) {
+        else if (Opcion == 5) {
             // Venta Planta
-            mi_vivero.mostrarInventario();
-            cout << "Indice del Cliente: "; cin >> indice_cliente;
-            cout << "Indice de la Planta: "; cin >> indice_planta;
-            mi_vivero.realizarVenta(indice_cliente, indice_planta);
+            MiVivero.MostrarInventario();
+            cout << "Indice del Cliente: "; cin >> IndiceCliente;
+            cout << "Indice de la Planta: "; cin >> IndicePlanta;
+            MiVivero.RealizarVenta(IndiceCliente, IndicePlanta);
         }
-        else if (opcion == 6) {
+        else if (Opcion == 6) {
             // Venta Maceta
-            mi_vivero.mostrarInventario();
-            cout << "Indice del Cliente: "; cin >> indice_cliente;
-            cout << "Indice de la Maceta: "; cin >> indice_maceta; 
-            mi_vivero.realizarVentaMaceta(indice_cliente, indice_maceta);
+            MiVivero.MostrarInventario();
+            cout << "Indice del Cliente: "; cin >> IndiceCliente;
+            cout << "Indice de la Maceta: "; cin >> IndiceMaceta; 
+            MiVivero.RealizarVentaMaceta(IndiceCliente, IndiceMaceta);
         }
-        else if (opcion == 0) {
+        else if (Opcion == 0) {
             cout << "Saliendo del sistema..." << endl;
         }
         else {
