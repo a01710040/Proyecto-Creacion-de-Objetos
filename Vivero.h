@@ -11,7 +11,7 @@ using namespace std;
 #define MAX_INVENTARIO 50
 
 /*
- * Clase Vivero: Clase Gestora
+ * Clase Vivero: Clase Gestora (Manager Class).
  */
 class Vivero {
 private:
@@ -21,25 +21,25 @@ private:
     Cliente ListaClientes[MAX_INVENTARIO];
 
     // Contadores
-    int ContadorPlantas;
-    int ContadorMacetas;
-    int ContadorClientes;
+    int contadorPlantas;
+    int contadorMacetas;
+    int contadorClientes;
 
 public:
     // --- Declaraciones de Constructores ---
     Vivero();
-    Vivero(int ContP, int ContM, int ContC);
+    Vivero(int contP, int contM, int contC);
     
     // --- Declaraciones de Métodos ---
-    void CrearPlanta(string Nombre, double Precio, int Stock);
-    void CrearMaceta(string Nombre, string Material, string Color, 
-                     double Precio, bool EsColgante);
+    void crearPlanta(string nombre, double precio, int stock);
+    void crearMaceta(string nombre, string material, string color, 
+                     double precio, bool esColgante);
 
-    void RegistrarCliente(Cliente C);
+    void registrarCliente(Cliente c);
 
-    void MostrarInventario();
-    void RealizarVenta(int IndiceCliente, int IndicePlanta);
-    void RealizarVentaMaceta(int IndiceCliente, int IndiceMaceta);
+    void mostrarInventario();
+    void realizarVenta(int indiceCliente, int indicePlanta);
+    void realizarVentaMaceta(int indiceCliente, int indiceMaceta);
 };
 
 
@@ -51,39 +51,39 @@ public:
  */
 Vivero::Vivero() {
     cout << ">> Vivero creado (Vacio)." << endl;
-    ContadorPlantas = 0;
-    ContadorMacetas = 0;
-    ContadorClientes = 0;
+    contadorPlantas = 0;
+    contadorMacetas = 0;
+    contadorClientes = 0;
 }
 
 /**
  * Constructor con Parámetros: Inicializa los contadores.
  *
- * @param int ContP: Contador inicial de plantas.
- * @param int ContM: Contador inicial de macetas.
- * @param int ContC: Contador inicial de clientes.
+ * @param int contP: Contador inicial de plantas.
+ * @param int contM: Contador inicial de macetas.
+ * @param int contC: Contador inicial de clientes.
  * @return Objeto Vivero
  */
-Vivero::Vivero(int ContP, int ContM, int ContC) {
+Vivero::Vivero(int contP, int contM, int contC) {
     cout << ">> Vivero creado con contadores iniciales." << endl;
-    ContadorPlantas = ContP;
-    ContadorMacetas = ContM;
-    ContadorClientes = ContC;
+    contadorPlantas = contP;
+    contadorMacetas = contM;
+    contadorClientes = contC;
 }
 
 /**
  * Método para crear y agregar una Planta al inventario.
  *
- * @param string Nombre: Nombre de la planta.
- * @param double Precio: Precio de la planta.
- * @param int Stock: Stock inicial.
+ * @param string nombre: Nombre de la planta.
+ * @param double precio: Precio de la planta.
+ * @param int stock: Stock inicial.
  * @return void
  */
-void Vivero::CrearPlanta(string Nombre, double Precio, int Stock) {
-    if (ContadorPlantas < MAX_INVENTARIO) {
-        InventarioPlantas[ContadorPlantas] = 
-            Planta(Nombre, Precio, Stock);
-        ContadorPlantas++;
+void Vivero::crearPlanta(string nombre, double precio, int stock) {
+    if (contadorPlantas < MAX_INVENTARIO) {
+        InventarioPlantas[contadorPlantas] = 
+            Planta(nombre, precio, stock);
+        contadorPlantas++;
         cout << ">> Planta creada y agregada exitosamente." << endl;
     } else {
         cout << "Error: Inventario lleno." << endl;
@@ -93,19 +93,19 @@ void Vivero::CrearPlanta(string Nombre, double Precio, int Stock) {
 /**
  * Método para crear y agregar una Maceta al inventario.
  *
- * @param string Nombre: Nombre de la maceta.
- * @param string Material: Material de la maceta.
- * @param string Color: Color de la maceta.
- * @param double Precio: Precio de la maceta.
- * @param bool EsColgante: Si la maceta es colgante.
+ * @param string nombre: Nombre de la maceta.
+ * @param string material: Material de la maceta.
+ * @param string color: Color de la maceta.
+ * @param double precio: Precio de la maceta.
+ * @param bool esColgante: Si la maceta es colgante.
  * @return void
  */
-void Vivero::CrearMaceta(string Nombre, string Material, string Color, 
-                         double Precio, bool EsColgante) {
-    if (ContadorMacetas < MAX_INVENTARIO) {
-        InventarioMacetas[ContadorMacetas] = 
-            Maceta(Nombre, Material, Color, Precio, EsColgante);
-        ContadorMacetas++;
+void Vivero::crearMaceta(string nombre, string material, string color, 
+                         double precio, bool esColgante) {
+    if (contadorMacetas < MAX_INVENTARIO) {
+        InventarioMacetas[contadorMacetas] = 
+            Maceta(nombre, material, color, precio, esColgante);
+        contadorMacetas++;
         cout << ">> Maceta creada y agregada exitosamente." << endl;
     } else {
         cout << "Error: Inventario lleno." << endl;
@@ -115,13 +115,13 @@ void Vivero::CrearMaceta(string Nombre, string Material, string Color,
 /**
  * Método para registrar un Cliente.
  *
- * @param Cliente C: Objeto Cliente a registrar.
+ * @param Cliente c: Objeto Cliente a registrar.
  * @return void
  */
-void Vivero::RegistrarCliente(Cliente C) {
-    if (ContadorClientes < MAX_INVENTARIO) {
-        ListaClientes[ContadorClientes] = C;
-        ContadorClientes++;
+void Vivero::registrarCliente(Cliente c) {
+    if (contadorClientes < MAX_INVENTARIO) {
+        ListaClientes[contadorClientes] = c;
+        contadorClientes++;
         cout << ">> Cliente registrado exitosamente." << endl;
     } else {
         cout << "Error: Lista de clientes llena." << endl;
@@ -134,25 +134,25 @@ void Vivero::RegistrarCliente(Cliente C) {
  * @param Ninguno
  * @return void
  */
-void Vivero::MostrarInventario() {
+void Vivero::mostrarInventario() {
     cout << "\n===== REPORTE VIVERO =====" << endl;
     
-    cout << "--- Plantas (" << ContadorPlantas << ") ---" << endl;
-    for (int I = 0; I < ContadorPlantas; I++) {
-        cout << I << ". "; 
-        InventarioPlantas[I].Mostrar();
+    cout << "--- Plantas (" << contadorPlantas << ") ---" << endl;
+    for (int i = 0; i < contadorPlantas; i++) {
+        cout << i << ". "; 
+        InventarioPlantas[i].mostrar();
     }
 
-    cout << "--- Macetas (" << ContadorMacetas << ") ---" << endl;
-    for (int I = 0; I < ContadorMacetas; I++) {
-        cout << I << ". ";
-        InventarioMacetas[I].Mostrar();
+    cout << "--- Macetas (" << contadorMacetas << ") ---" << endl;
+    for (int i = 0; i < contadorMacetas; i++) {
+        cout << i << ". ";
+        InventarioMacetas[i].mostrar();
     }
 
-    cout << "--- Clientes (" << ContadorClientes << ") ---" << endl;
-    for (int I = 0; I < ContadorClientes; I++) {
-        cout << I << ". ";
-        ListaClientes[I].Mostrar();
+    cout << "--- Clientes (" << contadorClientes << ") ---" << endl;
+    for (int i = 0; i < contadorClientes; i++) {
+        cout << i << ". ";
+        ListaClientes[i].mostrar();
     }
     cout << "==========================" << endl;
 }
@@ -160,29 +160,29 @@ void Vivero::MostrarInventario() {
 /**
  * Realiza la venta de una Planta y actualiza el stock/saldo.
  *
- * @param int IndiceCliente: Índice del cliente.
- * @param int IndicePlanta: Índice de la planta.
+ * @param int indiceCliente: Índice del cliente.
+ * @param int indicePlanta: Índice de la planta.
  * @return void
  */
-void Vivero::RealizarVenta(int IndiceCliente, int IndicePlanta) {
+void Vivero::realizarVenta(int indiceCliente, int indicePlanta) {
     // Validación de índices...
-    if (IndiceCliente >= 0 && IndiceCliente < ContadorClientes && 
-        IndicePlanta >= 0 && IndicePlanta < ContadorPlantas) {
+    if (indiceCliente >= 0 && indiceCliente < contadorClientes && 
+        indicePlanta >= 0 && indicePlanta < contadorPlantas) {
         
-        Cliente ElCliente = ListaClientes[IndiceCliente];
-        Planta LaPlanta = InventarioPlantas[IndicePlanta];
+        Cliente elCliente = ListaClientes[indiceCliente];
+        Planta laPlanta = InventarioPlantas[indicePlanta];
 
-        cout << "\nIntento de venta: " << ElCliente.GetNombre() << 
-            " quiere " << LaPlanta.GetNombre() << endl;
+        cout << "\nIntento de venta: " << elCliente.getNombre() << 
+            " quiere " << laPlanta.getNombre() << endl;
 
-        if (LaPlanta.GetStock() > 0) {
-            if (ElCliente.Comprar(LaPlanta.GetPrecio())) {
-                LaPlanta.ActualizarStock(-1); 
+        if (laPlanta.getStock() > 0) {
+            if (elCliente.comprar(laPlanta.getPrecio())) {
+                laPlanta.actualizarStock(-1); 
                 cout << ">> Venta Exitosa!" << endl;
 
                 // Guardar los objetos modificados
-                ListaClientes[IndiceCliente] = ElCliente;
-                InventarioPlantas[IndicePlanta] = LaPlanta;
+                ListaClientes[indiceCliente] = elCliente;
+                InventarioPlantas[indicePlanta] = laPlanta;
             } else {
                 cout << ">> Saldo insuficiente." << endl;
             }
@@ -195,33 +195,33 @@ void Vivero::RealizarVenta(int IndiceCliente, int IndicePlanta) {
 }
 
 /**
- * Realiza la venta de una Maceta. Elimina la maceta del inventario.
+ * Realiza la venta de una Maceta.
  *
- * @param int IndiceCliente: Índice del cliente.
- * @param int IndiceMaceta: Índice de la maceta.
+ * @param int indiceCliente: Índice del cliente.
+ * @param int indiceMaceta: Índice de la maceta.
  * @return void
  */
-void Vivero::RealizarVentaMaceta(int IndiceCliente, int IndiceMaceta) {
+void Vivero::realizarVentaMaceta(int indiceCliente, int indiceMaceta) {
     // Validación de índices...
-    if (IndiceCliente >= 0 && IndiceCliente < ContadorClientes && 
-        IndiceMaceta >= 0 && IndiceMaceta < ContadorMacetas) {
+    if (indiceCliente >= 0 && indiceCliente < contadorClientes && 
+        indiceMaceta >= 0 && indiceMaceta < contadorMacetas) {
         
-        Cliente ElCliente = ListaClientes[IndiceCliente];
-        Maceta LaMaceta = InventarioMacetas[IndiceMaceta];
+        Cliente elCliente = ListaClientes[indiceCliente];
+        Maceta laMaceta = InventarioMacetas[indiceMaceta];
 
-        cout << "\nIntento de venta: " << ElCliente.GetNombre() << 
-            " quiere " << LaMaceta.GetNombre() << endl;
+        cout << "\nIntento de venta: " << elCliente.getNombre() << 
+            " quiere " << laMaceta.getNombre() << endl;
 
-        if (ElCliente.Comprar(LaMaceta.GetPrecio())) {
+        if (elCliente.comprar(laMaceta.getPrecio())) {
             cout << ">> Venta Exitosa! Maceta eliminada del inventario." << endl;
             
-            ListaClientes[IndiceCliente] = ElCliente;
+            ListaClientes[indiceCliente] = elCliente;
             
             // Eliminar Maceta (Desplazamiento de elementos)
-            for (int I = IndiceMaceta; I < ContadorMacetas - 1; I++) {
-                InventarioMacetas[I] = InventarioMacetas[I + 1];
+            for (int i = indiceMaceta; i < contadorMacetas - 1; i++) {
+                InventarioMacetas[i] = InventarioMacetas[i + 1];
             }
-            ContadorMacetas--;
+            contadorMacetas--;
         } else {
             cout << ">> Saldo insuficiente." << endl;
         }
