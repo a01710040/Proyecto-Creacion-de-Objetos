@@ -8,22 +8,21 @@ using namespace std;
 
 /*
  * Clase Cliente: Representa a los clientes del vivero.
- * Contiene sus datos personales y su presupuesto actual.
  */
 class Cliente {
 private:
-    string NombreCliente;
-    double PresupuestoCliente;
+    string nombreCliente;
+    double presupuestoCliente;
 
 public:
     // --- Declaraciones ---
     Cliente();
-    Cliente(string NombreIn, double PresupuestoIn);
+    Cliente(string nombreIn, double presupuestoIn);
     
-    string GetNombre() const;
+    string getNombre() const;
     
-    bool Comprar(double CostoCompra); // PascalCase
-    void Mostrar();
+    bool comprar(double costoCompra);
+    void mostrar();
 };
 
 /**
@@ -33,20 +32,20 @@ public:
  * @return Objeto Cliente
  */
 Cliente::Cliente() {
-    NombreCliente = "Sin Nombre";
-    PresupuestoCliente = 0.0;
+    nombreCliente = "Sin Nombre";
+    presupuestoCliente = 0.0;
 }
 
 /**
  * Constructor con parámetros.
  *
- * @param string NombreIn: Nombre del cliente.
- * @param double PresupuestoIn: Dinero inicial del cliente.
+ * @param string nombreIn: Nombre del cliente.
+ * @param double presupuestoIn: Dinero inicial del cliente.
  * @return Objeto Cliente
  */
-Cliente::Cliente(string NombreIn, double PresupuestoIn) {
-    NombreCliente = NombreIn;
-    PresupuestoCliente = PresupuestoIn;
+Cliente::Cliente(string nombreIn, double presupuestoIn) {
+    nombreCliente = nombreIn;
+    presupuestoCliente = presupuestoIn;
 }
 
 /**
@@ -55,19 +54,19 @@ Cliente::Cliente(string NombreIn, double PresupuestoIn) {
  * @param Ninguno
  * @return string: Nombre del cliente.
  */
-string Cliente::GetNombre() const {
-    return NombreCliente;
+string Cliente::getNombre() const {
+    return nombreCliente;
 }
 
 /**
  * Simula la compra. Verifica si hay presupuesto suficiente.
  *
- * @param double CostoCompra: Precio total de la compra.
+ * @param double costoCompra: Precio total de la compra.
  * @return bool: true si la compra fue exitosa, false si no.
  */
-bool Cliente::Comprar(double CostoCompra) {
-    if (PresupuestoCliente >= CostoCompra) {
-        PresupuestoCliente = PresupuestoCliente - CostoCompra;
+bool Cliente::comprar(double costoCompra) {
+    if (presupuestoCliente >= costoCompra) {
+        presupuestoCliente = presupuestoCliente - costoCompra;
         return true;
     }
     return false;
@@ -79,9 +78,9 @@ bool Cliente::Comprar(double CostoCompra) {
  * @param Ninguno
  * @return void
  */
-void Cliente::Mostrar() {
-    cout << "Cliente: " << NombreCliente << " | Saldo: $" << 
-        PresupuestoCliente << endl;
+void Cliente::mostrar() {
+    cout << "Cliente: " << nombreCliente << " | Saldo: $" << 
+        presupuestoCliente << endl;
 }
 
 #endif // CLIENTE_H_
