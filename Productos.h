@@ -9,23 +9,22 @@ using namespace std;
 /*
  * Clase Producto: Clase base que contiene los atributos genéricos 
  * de todo artículo vendible en el vivero. 
- * Las clases Planta y Maceta heredan de esta clase.
  */
 class Producto {
 protected:
     // Atributos protegidos
-    string NombreProducto;
-    double PrecioProducto;
+    string nombreProducto;
+    double precioProducto;
 
 public:
     // --- Declaraciones de Constructores ---
     Producto();
-    Producto(string NombreIn, double PrecioIn);
+    Producto(string nombreIn, double precioIn);
 
     // --- Declaraciones de Métodos ---
-    string GetNombre() const;
-    double GetPrecio() const;
-    void SetPrecio(double NuevoPrecio);
+    string getNombre() const;
+    double getPrecio() const;
+    void setPrecio(double nuevoPrecio);
 };
 
 /*
@@ -33,17 +32,17 @@ public:
  */
 class Planta : public Producto {
 private:
-    int StockDisponible; // PascalCase
+    int stockDisponible;
 
 public:
     // --- Declaraciones de Constructores ---
     Planta();
-    Planta(string NombreIn, double PrecioIn, int StockIn);
+    Planta(string nombreIn, double precioIn, int stockIn);
 
     // --- Declaraciones de Métodos ---
-    int GetStock() const;
-    void ActualizarStock(int Cantidad);
-    void Mostrar();
+    int getStock() const;
+    void actualizarStock(int cantidad);
+    void mostrar();
 };
 
 /*
@@ -51,18 +50,18 @@ public:
  */
 class Maceta : public Producto {
 private:
-    string MaterialMaceta; // PascalCase
-    string ColorMaceta;    // PascalCase
-    bool EsColgante;       // PascalCase
+    string materialMaceta;
+    string colorMaceta;
+    bool esColgante;
 
 public:
     // --- Declaraciones de Constructores ---
     Maceta();
-    Maceta(string NombreIn, string MaterialIn, string ColorIn, 
-           double PrecioIn, bool ColganteIn);
+    Maceta(string nombreIn, string materialIn, string colorIn, 
+           double precioIn, bool colganteIn);
 
     // --- Declaraciones de Métodos ---
-    void Mostrar();
+    void mostrar();
 };
 
 // ============================================================================
@@ -71,26 +70,25 @@ public:
 
 /**
  * Constructor por defecto de la clase Producto.
- * Inicializa nombre y precio a valores por defecto.
  *
  * @param Ninguno
  * @return Objeto Producto inicializado
  */
 Producto::Producto() {
-    NombreProducto = "Sin Nombre";
-    PrecioProducto = 0.0;
+    nombreProducto = "Sin Nombre";
+    precioProducto = 0.0;
 }
 
 /**
  * Constructor con parámetros de la clase Producto.
  *
- * @param string NombreIn: Nombre del producto.
- * @param double PrecioIn: Precio del producto.
+ * @param string nombreIn: Nombre del producto.
+ * @param double precioIn: Precio del producto.
  * @return Objeto Producto inicializado
  */
-Producto::Producto(string NombreIn, double PrecioIn) {
-    NombreProducto = NombreIn;
-    PrecioProducto = PrecioIn;
+Producto::Producto(string nombreIn, double precioIn) {
+    nombreProducto = nombreIn;
+    precioProducto = precioIn;
 }
 
 /**
@@ -99,8 +97,8 @@ Producto::Producto(string NombreIn, double PrecioIn) {
  * @param Ninguno
  * @return string: El nombre almacenado del producto.
  */
-string Producto::GetNombre() const {
-    return NombreProducto;
+string Producto::getNombre() const {
+    return nombreProducto;
 }
 
 /**
@@ -109,20 +107,19 @@ string Producto::GetNombre() const {
  * @param Ninguno
  * @return double: El precio almacenado del producto.
  */
-double Producto::GetPrecio() const {
-    return PrecioProducto;
+double Producto::getPrecio() const {
+    return precioProducto;
 }
 
 /**
  * Método setter para actualizar el precio del producto.
- * Valida que el precio no sea negativo.
  *
- * @param double NuevoPrecio: El nuevo valor a asignar.
+ * @param double nuevoPrecio: El nuevo valor a asignar.
  * @return void
  */
-void Producto::SetPrecio(double NuevoPrecio) {
-    if (NuevoPrecio >= 0) {
-        PrecioProducto = NuevoPrecio;
+void Producto::setPrecio(double nuevoPrecio) {
+    if (nuevoPrecio >= 0) {
+        precioProducto = nuevoPrecio;
     }
 }
 
@@ -132,26 +129,25 @@ void Producto::SetPrecio(double NuevoPrecio) {
 
 /**
  * Constructor por defecto de Planta.
- * Llama al constructor base de Producto.
  *
  * @param Ninguno
  * @return Objeto Planta inicializado con stock 0
  */
 Planta::Planta() : Producto() {
-    StockDisponible = 0;
+    stockDisponible = 0;
 }
 
 /**
  * Constructor con parámetros de Planta.
  *
- * @param string NombreIn: Nombre de la planta.
- * @param double PrecioIn: Precio de la planta.
- * @param int StockIn: Cantidad inicial en inventario.
+ * @param string nombreIn: Nombre de la planta.
+ * @param double precioIn: Precio de la planta.
+ * @param int stockIn: Cantidad inicial en inventario.
  * @return Objeto Planta inicializado
  */
-Planta::Planta(string NombreIn, double PrecioIn, int StockIn) 
-    : Producto(NombreIn, PrecioIn) {
-    StockDisponible = StockIn;
+Planta::Planta(string nombreIn, double precioIn, int stockIn) 
+    : Producto(nombreIn, precioIn) {
+    stockDisponible = stockIn;
 }
 
 /**
@@ -160,20 +156,19 @@ Planta::Planta(string NombreIn, double PrecioIn, int StockIn)
  * @param Ninguno
  * @return int: Cantidad de plantas en stock.
  */
-int Planta::GetStock() const { 
-    return StockDisponible; 
+int Planta::getStock() const { 
+    return stockDisponible; 
 }
 
 /**
  * Método para actualizar la cantidad de stock disponible.
- * Permite sumar (entrada) o restar (venta) stock.
  *
- * @param int Cantidad: Valor a sumar o restar.
+ * @param int cantidad: Valor a sumar o restar.
  * @return void
  */
-void Planta::ActualizarStock(int Cantidad) {
-    if (StockDisponible + Cantidad >= 0) {
-        StockDisponible = StockDisponible + Cantidad;
+void Planta::actualizarStock(int cantidad) {
+    if (stockDisponible + cantidad >= 0) {
+        stockDisponible = stockDisponible + cantidad;
     } else {
         cout << "ERROR: No hay suficiente stock." << endl;
     }
@@ -185,9 +180,9 @@ void Planta::ActualizarStock(int Cantidad) {
  * @param Ninguno
  * @return void
  */
-void Planta::Mostrar() {
-    cout << "Planta: " << NombreProducto << " | Precio: $" << 
-        PrecioProducto << " | Stock: " << StockDisponible << endl;
+void Planta::mostrar() {
+    cout << "Planta: " << nombreProducto << " | Precio: $" << 
+        precioProducto << " | Stock: " << stockDisponible << endl;
 }
 
 // ============================================================================
@@ -196,33 +191,32 @@ void Planta::Mostrar() {
 
 /**
  * Constructor por defecto de Maceta.
- * Llama al constructor base de Producto.
  *
  * @param Ninguno
  * @return Objeto Maceta inicializado con valores N/A
  */
 Maceta::Maceta() : Producto() {
-    MaterialMaceta = "N/A";
-    ColorMaceta = "N/A";
-    EsColgante = false;
+    materialMaceta = "N/A";
+    colorMaceta = "N/A";
+    esColgante = false;
 }
 
 /**
  * Constructor con parámetros de Maceta.
  *
- * @param string NombreIn: Nombre de la maceta.
- * @param string MaterialIn: Material de fabricación.
- * @param string ColorIn: Color de la maceta.
- * @param double PrecioIn: Precio de venta.
- * @param bool ColganteIn: True si es colgante, False si es de piso.
+ * @param string nombreIn: Nombre de la maceta.
+ * @param string materialIn: Material de fabricación.
+ * @param string colorIn: Color de la maceta.
+ * @param double precioIn: Precio de venta.
+ * @param bool colganteIn: True si es colgante, False si es de piso.
  * @return Objeto Maceta inicializado
  */
-Maceta::Maceta(string NombreIn, string MaterialIn, string ColorIn, 
-               double PrecioIn, bool ColganteIn) 
-    : Producto(NombreIn, PrecioIn) {
-    MaterialMaceta = MaterialIn;
-    ColorMaceta = ColorIn;
-    EsColgante = ColganteIn;
+Maceta::Maceta(string nombreIn, string materialIn, string colorIn, 
+               double precioIn, bool colganteIn) 
+    : Producto(nombreIn, precioIn) {
+    materialMaceta = materialIn;
+    colorMaceta = colorIn;
+    esColgante = colganteIn;
 }
 
 /**
@@ -231,10 +225,10 @@ Maceta::Maceta(string NombreIn, string MaterialIn, string ColorIn,
  * @param Ninguno
  * @return void
  */
-void Maceta::Mostrar() {
-    string Tipo = EsColgante ? "Si" : "No";
-    cout << "Maceta: " << NombreProducto << " | Mat: " << MaterialMaceta << 
-        " | Colgante: " << Tipo << " | Precio: $" << PrecioProducto << endl;
+void Maceta::mostrar() {
+    string tipo = esColgante ? "Si" : "No";
+    cout << "Maceta: " << nombreProducto << " | Mat: " << materialMaceta << 
+        " | Colgante: " << tipo << " | Precio: $" << precioProducto << endl;
 }
 
 #endif // PRODUCTOS_H_
