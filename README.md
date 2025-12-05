@@ -30,7 +30,7 @@ Para lograr esto, la estructura de clases implementa los siguientes pilares de P
 
 ### B. Convenciones de Estilo
 
-* **Estilo:** Se utiliza **`PascalCase`** para *todos* los elementos del código (Clases, Métodos, Atributos y Variables locales).
+* **Estilo:** Se utiliza **`PascalCase`** para clases y objetos y **`camelCase`** para funciones y varialbes/atributos.
 * **Legibilidad:** Se aplica una restricción estricta de **máximo 80 caracteres por línea**.
 * **Documentación:** Uso de comentarios estilo Javadoc con `@param` y `@return` en las implementaciones.
 
