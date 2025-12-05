@@ -74,7 +74,12 @@ El programa incluye mensajes de error y rechaza la acción si:
 
 ---
 
-## 5. Compilación y Ejecución
+## 5. Diagrama de clases
+ [Diagrama de clases](./diagramadeClases.png)
+
+ ---
+
+## 6. Compilación y Ejecución
 
 Para compilar y ejecutar el programa desde la terminal, siga estos pasos:
 
@@ -86,8 +91,23 @@ Para compilar y ejecutar el programa desde la terminal, siga estos pasos:
     ```bash
     ./gestor_vivero
     ```
+---
 
-## 6. Correciones
+## 7. Consideraciones
+
+Dentro del código uso `const`, algo que no hemos visto en clase y decidí investigarlo por mi cuenta.
+
+### ¿Para qué se utiliza?
+
+Se utiliza al final de los Getters para así proporcionar una garantía de inmutabilidad. 
+
+### ¿Por qué se usa en este proyecto?
+
+Lo utilizo porque así me puedo asegurar que algunos métodos de acceso como `getNombre()` o `getStock()` no modifiquen el estado interno de los atributos de las clases y así reforzar el encapsulamiento.
+
+---
+
+## 8. Correciones
 
 1.  **Implementa SICT0303A:** Añadí using namespace std; porque no compilaba, se encuentra en los archivos.
 2.  **Toma de decisiones SICT0302A:** Hice mi diseño del diagrama de clases más claro para que se comprendiera más el concepto de herencia, se encuentra en el diagrama de clases.
